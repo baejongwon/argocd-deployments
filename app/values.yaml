@@ -116,14 +116,3 @@ namespace: delivery
 # Redis 설정 추가
 redis:
   enabled: true
-  image: ${IMAGE_NAME}:${BUILD_NUMBER}
-  imagePullPolicy: IfNotPresent
-  service:
-    port: 6379
-  resources:
-    limits:
-      cpu: 100m
-      memory: 256Mi
-    requests:
-      cpu: 100m
-      memory: 256Mi
