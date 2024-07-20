@@ -116,7 +116,7 @@ namespace: delivery
 # Redis 설정 추가
 redis:
   enabled: true
-  image: 339712755995.dkr.ecr.ap-northeast-2.amazonaws.com/library2:6
+  image: ${IMAGE_NAME}:${BUILD_NUMBER}
   imagePullPolicy: IfNotPresent
   service:
     port: 6379
