@@ -11,6 +11,10 @@ metadata:
     alb.ingress.kubernetes.io/target-group-attributes: {{ .Values.ingress.targetGroupAttributes }}
     alb.ingress.kubernetes.io/target-type: {{ .Values.ingress.targetType }}
     external-dns.alpha.kubernetes.io/hostname: {{ .Values.ingress.hostname }}
+    alb.ingress.kubernetes.io/listen-ports: {{ .Values.ingress.listenPorts }}
+    alb.ingress.kubernetes.io/certificate-arn: {{ .Values.ingress.certificateArn }}
+    alb.ingress.kubernetes.io/ssl-redirect: {{ .Values.ingress.sslRedirect }}
+    alb.ingress.kubernetes.io/ssl-policy: {{ .Values.ingress.sslPolicy }}
 spec:
   rules:
   - host: {{ .Values.ingress.rules.host }}
