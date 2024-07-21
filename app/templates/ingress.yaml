@@ -2,27 +2,27 @@
 apiVersion: networking.k8s.io/v1
 kind: Ingress
 metadata:
-  name: {{ .Release.Name }}-ingress
-  namespace: {{ .Values.namespace }}
+  name: {{ .Release.Name }}-ingress # Ingress 리소스의 이름을 Helm 릴리즈 이름으로 설정
+  namespace: {{ .Values.namespace }} # 네임스페이스를 values.yaml 파일에서 가져옴
   annotations:
-    kubernetes.io/ingress.class: {{ .Values.ingress.class }}
-    alb.ingress.kubernetes.io/load-balancer-name: {{ .Values.ingress.loadBalancerName }}
-    alb.ingress.kubernetes.io/scheme: {{ .Values.ingress.scheme }}
-    alb.ingress.kubernetes.io/target-group-attributes: {{ .Values.ingress.targetGroupAttributes }}
-    alb.ingress.kubernetes.io/target-type: {{ .Values.ingress.targetType }}
-    external-dns.alpha.kubernetes.io/hostname: {{ .Values.ingress.hostname }}
+    kubernetes.io/ingress.class: {{ .Values.ingress.class }} # Ingress 클래스(ALB)를 설정
+    alb.ingress.kubernetes.io/load-balancer-name: {{ .Values.ingress.loadBalancerName }} # ALB의 이름을 설정
+    alb.ingress.kubernetes.io/scheme: {{ .Values.ingress.scheme }} # ALB의 스킴을 설정(internet-facing)
+    alb.ingress.kubernetes.io/target-group-attributes: {{ .Values.ingress.targetGroupAttributes }} # 타겟 그룹 속성 설정
+    alb.ingress.kubernetes.io/target-type: {{ .Values.ingress.targetType }} # 타겟 타입을 설정(ip)
+    external-dns.alpha.kubernetes.io/hostname: {{ .Values.ingress.hostname }} # 외부 DNS 호스트 이름을 설정
 spec:
   rules:
-  - host: {{ .Values.ingress.rules.host }}
+  - host: {{ .Values.ingress.rules.host }} # 호스트 이름 설정(www.jongwon-project.link)
     http:
       paths:
       {{- range .Values.ingress.rules.paths }}
-      - pathType: {{ .pathType }}
-        path: {{ .path }}
+      - pathType: {{ .pathType }} # 경로 타입(Prefix)을 설정
+        path: {{ .path }} # 경로 설정(/ 및 /book)
         backend:
           service:
-            name: {{ .service.name }}
+            name: {{ .service.name }} # 백엔드 서비스 이름(web-svc 및 web-svc-2)
             port: 
-              number: {{ .service.port }}
+              number: {{ .service.port }} # 백엔드 서비스 포트(80)
       {{- end }}
 {{- end }}
