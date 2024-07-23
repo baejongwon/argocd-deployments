@@ -2,7 +2,7 @@
 apiVersion: networking.k8s.io/v1
 kind: Ingress
 metadata:
-  name: {{ .Release.Name }}-ingress # Ingress 리소스의 이름을 Helm 릴리즈 이름으로 설정
+  name: my-ingress # Ingress 리소스의 이름을 Helm 릴리즈 이름으로 설정
   namespace: {{ .Values.namespace }} # 네임스페이스를 values.yaml 파일에서 가져옴
   annotations:
     kubernetes.io/ingress.class: {{ .Values.ingress.class }} # Ingress 클래스(ALB)를 설정
